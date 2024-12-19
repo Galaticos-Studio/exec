@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour, IEnemy
 
     protected virtual void Die()
     {
-        Debug.Log($"{gameObject.name} has been defeated!");
+        Debug.Log($"{gameObject.name} Died");
         IsDead = true;
         Destroy(gameObject);
     }

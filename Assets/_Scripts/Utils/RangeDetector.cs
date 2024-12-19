@@ -20,8 +20,10 @@ public class RangeDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"Enter collision with tag {other.tag}");
         if (other.CompareTag(searchTag))
         {
+            Debug.Log($"Found {searchTag}");
             onPlayerDetected?.Invoke(other.gameObject); // Pass the detected player GameObject
         }
     }

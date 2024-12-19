@@ -16,18 +16,17 @@ public class Goblin : Enemy
     public override void Attack()
     {
         base.Attack();
-        Debug.Log("The Goblin swings its rusty dagger!");
+        Debug.Log("Goblin Attacks");
     }
 
     protected override void Die()
     {
         base.Die();
-        Debug.Log("The Goblin screams 'Arghhh!' as it falls.");
     }
 
     public override void OnPlayerInRange(GameObject player)
     {
-        Debug.Log("The Goblin shouts and rushes toward the player!");
+        Debug.Log("Goblin has Player in range");
         Attack();
     }
 }
