@@ -5,12 +5,16 @@ public class Goblin : Enemy
 {
     protected override void Start()
     {
-        Debug.Log("GOBLIN START 1");
         base.Start();
-        Debug.Log("GOBLIN START 2");
         Hp = 50; // Goblins are weaker
         AttackPower = 5; // Goblins deal less damage
+        MovementSpeed = 3f;
         Debug.Log("A Goblin has spawned!");
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
     public override void Attack()
@@ -26,7 +30,10 @@ public class Goblin : Enemy
 
     public override void OnPlayerInRange(GameObject player)
     {
-        Debug.Log("Goblin has Player in range");
-        Attack();
+        MovementSpeed = MovementSpeed * 1.8f;
+        base.OnPlayerInRange(player);
+        Debug.Log("Goblin growls and starts following the player!");
     }
+
+
 }

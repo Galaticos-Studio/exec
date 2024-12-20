@@ -36,14 +36,35 @@ public class EnemyMovement : MonoBehaviour
         leftEdge = transform.position.x - patrolRange;
         rightEdge = transform.position.x + patrolRange;
     }
-
     void Update()
     {
-        if (!enemy.IsDead)
+        if (!enemy.IsDead && !enemy.target)
         {
             Patrol();
         }
+        if (!enemy.IsDead && enemy.target)
+        {
+            FollowTarget();
+        }
     }
+
+    protected virtual void FollowTarget()
+    {
+
+        Vector3 direction = (enemy.target.position - transform.position).normalized;
+        transform.position += direction * enemy.MovementSpeed * Time.deltaTime;
+
+        // Flip sprite based on movement direction
+        if (direction.x > 0 && !IsFacingRight())
+        {
+            Flip();
+        }
+        else if (direction.x < 0 && IsFacingRight())
+        {
+            Flip();
+        }
+    }
+
 
     void Patrol()
     {
@@ -73,6 +94,11 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = scale;
     }
 
+    public bool IsFacingRight()
+    {
+        return transform.localScale.x > 0;
+    }
+
 
     void OnPlayerDetected(GameObject player)
     {
@@ -82,7 +108,5 @@ public class EnemyMovement : MonoBehaviour
             enemy.OnPlayerInRange(player);
         }
     }
-
-
 
 }

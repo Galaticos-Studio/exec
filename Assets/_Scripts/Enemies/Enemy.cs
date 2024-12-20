@@ -4,21 +4,27 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IEnemy
 {
     public float AttackPower { get; set; } = 10;
-    public float MovementSpeed { get; set; } = 3.5f;
+    public float MovementSpeed { get; set; } = 2f;
     public float Hp { get; set; } = 100;
     public bool IsDead { get; set; } = false;
 
     protected EnemyMovement movement;
 
+    public Transform target; // Target to follow
+
     protected virtual void Start()
     {
-        Debug.Log("BASE START");
         // Attach or get the EnemyMovement script
         movement = GetComponent<EnemyMovement>();
         if (movement == null)
         {
             movement = gameObject.AddComponent<EnemyMovement>();
         }
+    }
+
+    protected virtual void Update()
+    {
+
     }
 
     public virtual void TakeDamage(int damage)
@@ -46,8 +52,7 @@ public abstract class Enemy : MonoBehaviour, IEnemy
 
     public virtual void OnPlayerInRange(GameObject player)
     {
-        // Default behavior when the player is detected
-        Debug.Log($"{gameObject.name} detected the player! Default behavior triggered.");
+        Debug.Log($"{gameObject.name} detected the player: {player.name}");
+        target = player.transform; // Set the player as the target
     }
-
 }
