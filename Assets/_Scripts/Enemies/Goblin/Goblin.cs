@@ -30,7 +30,7 @@ public class Goblin : Enemy
 
     public override void OnPlayerInRange(GameObject player)
     {
-        MovementSpeed = MovementSpeed * 1.8f;
+        MovementSpeed = 4.5f;
         base.OnPlayerInRange(player);
         Debug.Log("Goblin growls and starts following the player!");
     }
